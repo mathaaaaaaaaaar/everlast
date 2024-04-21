@@ -15,11 +15,16 @@ const productSchema = new mongoose.Schema({
 
 const app = express();
 
-const Product = mongoose.model('Product', productSchema);
+app.use(express.json());
+
+const Product = mongoose.model('Product', productSchema, 'Products');
+
+app.use('/images', express.static('../frontend/public/assets'));
 
 app.post('/products', async (req, res) => {
-    const product = new Product(req.body);
-    const result = await product.save();
+
+    const result = await Product.insertMany(req.body);
+    console.log(result);
     res.send(result);
   });
 
