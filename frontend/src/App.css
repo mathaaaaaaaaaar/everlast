@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,41 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.store-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #FFE4B5; /* Beige background */
+  border-bottom: 1px solid #8b4513; /* SaddleBrown border */
+}
+
+.header-left-section, .header-right-section, .header-center-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.store-header h1 {
+  font-size: 30px;
+  color: #8b4513;
+}
+
+.store-header button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #8b4513;
+  color: #f5f5dc;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.store-header button:hover {
+  background-color: #556b2f;
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
