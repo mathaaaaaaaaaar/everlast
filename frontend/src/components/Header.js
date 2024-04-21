@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Header = () => {
+import Cart from './Cart';
+
+const Header = ({ cart, clearCart, removeFromCart }) => {
+
+    const [isCartOpen, setIsCartOpen] = useState(false);
+
+    function toggleCart() {
+        setIsCartOpen(oldState => !oldState);
+    }
 
     return (
         <header className='store-header'>
@@ -13,7 +21,13 @@ const Header = () => {
             </div>
             <div className="header-right-section">
                 <button>Log In</button>
-                <button>Cart</button>
+                <button onClick={toggleCart}>Cart</button>
+                {isCartOpen && (
+                    <>
+                        <div className="cart-backdrop" onClick={toggleCart}></div>
+                        <Cart cart={cart} toggleCart={toggleCart} clearCart={clearCart} removeFromCart={removeFromCart} />
+                    </>
+                )}
                 <button>About</button>
             </div>
         </header>

@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 
@@ -16,6 +17,8 @@ const productSchema = new mongoose.Schema({
 const app = express();
 
 app.use(express.json());
+
+app.use(cors())
 
 const Product = mongoose.model('Product', productSchema, 'Products');
 
