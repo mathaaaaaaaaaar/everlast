@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import crossIcon from '../icons/cross.png';
 import CartItem from './CartItem';
+import CheckoutModal from './Checkout';
 
 const Cart = ({cart, toggleCart, clearCart, removeFromCart}) => {
+
+    const [isCheckoutOpen, setCheckoutOpen] = useState(false);
+
     if (!cart) {
         return <div>Loading...</div>;
     }
@@ -17,6 +21,12 @@ const Cart = ({cart, toggleCart, clearCart, removeFromCart}) => {
             {cart.map((product, index) => (
                 <CartItem item={product} removeFromCart={removeFromCart} />
             ))}
+            <button onClick={() => setCheckoutOpen(true)}>Checkout</button>
+            <CheckoutModal
+                isOpen={isCheckoutOpen}
+                onRequestClose={() => setCheckoutOpen(false)}
+                cartItems = {cart}
+            />
         </div>
     );
 };
