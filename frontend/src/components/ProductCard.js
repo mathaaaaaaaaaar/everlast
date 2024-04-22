@@ -27,15 +27,6 @@ const ProductCard = ({ product, addToCart, removeFromCart }) => {
             </button>
         </div>
     );
-    return (
-        <div className="product">
-            <img src={product.image} alt={product.name} />
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
-            <p>${product.price}</p>
-            <button onClick={handleATCClick}>Add to Cart</button>
-        </div>
-    );
 };
 
 export default ProductCard;

@@ -108,8 +108,8 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
 }
 
 .cart-item img {
@@ -142,4 +142,33 @@
 
 .cart h2 {
   text-align: center;
+}
+
+.close-cart-button {
+  margin: 0 10px;
+}
+
+.cart-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.cart-header h2 {
+  grid-column: 2;
+}
+
+.clear-cart-button {
+  grid-column: 1;
+  justify-self: start;
+}
+
+.close-cart-button {
+  grid-column: 3;
+  justify-self: end;
+  cursor: pointer;
+}
+
+.remove-icon {
+  cursor: pointer;
 }

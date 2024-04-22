@@ -1,5 +1,7 @@
 import React from 'react';
 
+import trashIcom from '../icons/trash.png';
+
 const CartItem = ({ item, removeFromCart }) => {
     return (
         <div className="cart-item">
@@ -8,7 +10,7 @@ const CartItem = ({ item, removeFromCart }) => {
                 <span className="name">{item.name}</span>
                 <span className="price">{item.price}</span>
                 <span className="quantity">{item.quantity}</span>
-                <button onClick={() => removeFromCart(item)}>Remove</button>
+                <img className='icons remove-icon' src={trashIcom} onClick={() => removeFromCart(item)} alt="Remove Item" style={{ width: '32px', height: '32px' }} />
             </div>
         </div>
     );
