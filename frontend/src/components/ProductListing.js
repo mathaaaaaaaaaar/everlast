@@ -18,14 +18,16 @@ const ProductListings = ({ addToCart, removeFromCart }) => {
                 console.log(response);
                 return response.json();
             })
-          .then(data => setProducts(data))
+          .then(data => {
+            setProducts(data);
+        })
           .catch(error => console.error('Error:', error));
       }, []);
 
     return (
         <div className="product-listings">
             {products.map(product => (
-                <ProductCard key={product.id} product={product} addToCart={addToCart} removeFromCart={removeFromCart} />
+                <ProductCard product={product} addToCart={addToCart} removeFromCart={removeFromCart} />
             ))}
         </div>
     );

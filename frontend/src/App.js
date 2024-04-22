@@ -1,6 +1,9 @@
 import './App.css';
 
-import { useState } from 'react';
+import {
+  useEffect,
+  useState,
+} from 'react';
 
 import Header from './components/Header';
 import ProductListings from './components/ProductListing';
@@ -8,12 +11,58 @@ import ProductListings from './components/ProductListing';
 function App() {
   const [cart, setCart] = useState([]);
 
-  const addToCart = (product) => {
-    setCart(oldCart => [...oldCart, product]);
+  const fetchCart = async () => {
+    try {
+      const response = await fetch('http://localhost:5555/cart');
+  
+      if (!response.ok) {
+        throw new Error('HTTP error ' + response.status);
+      }
+  
+      const data = await response.json();
+      setCart(data);
+    } catch (error) {
+      console.error('Failed to fetch cart:', error);
+    }
+  };
+
+  const addToCart = async (product) => {
+    try {
+      const response = await fetch('http://localhost:5555/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(product),
+      });
+  
+      if (!response.ok) {
+        throw new Error('HTTP error ' + response.status);
+      }
+      const data = await response.json();
+      fetchCart();
+    } catch (error) {
+      console.error('Failed to add item to cart:', error);
+    }
   }
 
-  const removeFromCart = (product) => {
-    setCart(oldCart => oldCart.filter(item => item !== product));
+  const removeFromCart = async (product) => {
+    try {
+      const response = await fetch(`http://localhost:5555/cart/${product.name}`, {
+        method: 'DELETE',
+      });
+  
+      if (!response.ok) {
+        throw new Error('HTTP error ' + response.status);
+      }
+  
+      const data = await response.json();
+  
+      // Assuming the API returns the updated cart
+      fetchCart();
+    } catch (error) {
+      console.error('Failed to remove item from cart:', error);
+    }
     window.location.reload();
   }
 
@@ -21,6 +70,10 @@ function App() {
     setCart([]);
     window.location.reload();
   };
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
 
   return (
 

@@ -15,15 +15,20 @@ const productSchema = new mongoose.Schema({
 });
 
 const cartSchema = new mongoose.Schema({
-    product: productSchema,
-    quantity: Number
+    name: String,
+    description: String,
+    price: Number,
+    image: String
 });
 
 const app = express();
 
 app.use(express.json());
 
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:3000",
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
+}));
 
 const Product = mongoose.model('Product', productSchema, 'Products');
 
@@ -34,7 +39,6 @@ app.use('/images', express.static('../frontend/public/assets'));
 // Products Route
 app.post('/products', async (req, res) => {
     const result = await Product.insertMany(req.body);
-    console.log(result);
     res.send(result);
   });
 
@@ -47,6 +51,11 @@ app.get('/products', async (req, res) => {
 app.post('/cart', async (req, res) => {
     const result = await Cart.create(req.body);
     console.log(result);
+    res.send(result);
+});
+
+app.delete('/cart/:name', async (req, res) => {
+    const result = await Cart.findOneAndDelete({ name: req.params.name });
     res.send(result);
 });
 

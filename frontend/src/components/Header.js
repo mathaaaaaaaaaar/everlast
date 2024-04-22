@@ -13,8 +13,7 @@ const Header = ({ cart, clearCart, removeFromCart }) => {
     return (
         <header className='store-header'>
             <div className="header-left-section">
-                <button>Featured</button>
-                <button>Promotions</button>
+                <button>Products</button>
             </div>
             <div className="header-center-section">
                 <h1>Everlast</h1>
