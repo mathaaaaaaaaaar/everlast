@@ -12,12 +12,12 @@ const Header = ({ cart, clearCart, removeFromCart }) => {
 
     return (
         <header className='store-header'>
-            <div className="header-left-section">
+            <a className="header-left-section" href='/products'>
                 <button>Products</button>
-            </div>
-            <div className="header-center-section">
+            </a>
+            <a className="header-center-section" href='/'>
                 <h1>Everlast</h1>
-            </div>
+            </a>
             <div className="header-right-section">
                 <button>Log In</button>
                 <button onClick={toggleCart}>Cart</button>
@@ -27,7 +27,9 @@ const Header = ({ cart, clearCart, removeFromCart }) => {
                         <Cart cart={cart} toggleCart={toggleCart} clearCart={clearCart} removeFromCart={removeFromCart} />
                     </>
                 )}
-                <button>About</button>
+                <a href='/about'>
+                    <button>About</button>
+                </a>
             </div>
         </header>
     );

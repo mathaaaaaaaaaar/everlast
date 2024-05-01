@@ -5,6 +5,13 @@ import {
   useState,
 } from 'react';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from 'react-router-dom';
+
+import About from './components/About';
 import Header from './components/Header';
 import ProductListings from './components/ProductListing';
 
@@ -76,10 +83,16 @@ function App() {
   }, []);
 
   return (
-
     <div className="App">
       <Header cart={cart} clearCart={clearCart} removeFromCart={removeFromCart} />
-      { <ProductListings addToCart={addToCart} removeFromCart={removeFromCart} /> }
+      {/* { <ProductListings addToCart={addToCart} removeFromCart={removeFromCart} /> } */}
+
+      <Router>
+        <Routes>
+            <Route path="/products" element={<ProductListings addToCart={addToCart} removeFromCart={removeFromCart} />} />
+            <Route path='/about' element={<About />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
