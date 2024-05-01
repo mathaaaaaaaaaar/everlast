@@ -270,3 +270,68 @@
 a {
   text-decoration: none;
 }
+
+/* About.css */
+.about-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+}
+
+.about-title {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.about-text {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 30px;
+  text-align: center;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+.about-subtitle {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.about-image {
+  width: 40%;
+  max-width: 800px;
+  height: auto;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.about-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body {
+  background: url('http://localhost:5555/images/background.png') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(256, 256, 256, 0.6); /* Change the color and opacity as needed */
+  z-index: -1;
+}
