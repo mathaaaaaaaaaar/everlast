@@ -6,20 +6,8 @@ import {
   MONGO_URL,
   PORT,
 } from './config.js';
-
-const productSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-    price: Number,
-    image: String
-});
-
-const cartSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-    price: Number,
-    image: String
-});
+import cartRouter from './Routes/cart.js';
+import productRouter from './Routes/product.js';
 
 const app = express();
 
@@ -30,39 +18,39 @@ app.use(cors({
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
 }));
 
-const Product = mongoose.model('Product', productSchema, 'Products');
-
-const Cart = mongoose.model('Cart', cartSchema, 'Cart');
-
 app.use('/images', express.static('../frontend/public/assets'));
 
-// Products Route
-app.post('/products', async (req, res) => {
-    const result = await Product.insertMany(req.body);
-    res.send(result);
-  });
+// // Products Route
+// app.post('/products', async (req, res) => {
+//     const result = await Product.insertMany(req.body);
+//     res.send(result);
+//   });
 
-app.get('/products', async (req, res) => {
-    const products = await Product.find();
-    res.send(products);
-  });
+// app.get('/products', async (req, res) => {
+//     const products = await Product.find();
+//     res.send(products);
+//   });
 
-// Cart Route
-app.post('/cart', async (req, res) => {
-    const result = await Cart.create(req.body);
-    console.log(result);
-    res.send(result);
-});
+app.use('/products', productRouter);
 
-app.delete('/cart/:name', async (req, res) => {
-    const result = await Cart.findOneAndDelete({ name: req.params.name });
-    res.send(result);
-});
+// // Cart Route
+// app.post('/cart', async (req, res) => {
+//     const result = await Cart.create(req.body);
+//     console.log(result);
+//     res.send(result);
+// });
 
-app.get('/cart', async (req, res) => {
-    const products = await Cart.find();
-    res.send(products);
-  });
+// app.delete('/cart/:name', async (req, res) => {
+//     const result = await Cart.findOneAndDelete({ name: req.params.name });
+//     res.send(result);
+// });
+
+// app.get('/cart', async (req, res) => {
+//     const products = await Cart.find();
+//     res.send(products);
+//   });
+
+app.use('/cart', cartRouter);
 
 mongoose.connect(MONGO_URL)
   .then(() => {
