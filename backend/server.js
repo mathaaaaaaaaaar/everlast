@@ -8,6 +8,7 @@ import {
 } from './config.js';
 import cartRouter from './Routes/cart.js';
 import productRouter from './Routes/product.js';
+import wishlistRouter from './Routes/wishlist.js';
 
 const app = express();
 
@@ -20,37 +21,11 @@ app.use(cors({
 
 app.use('/images', express.static('../frontend/public/assets'));
 
-// // Products Route
-// app.post('/products', async (req, res) => {
-//     const result = await Product.insertMany(req.body);
-//     res.send(result);
-//   });
-
-// app.get('/products', async (req, res) => {
-//     const products = await Product.find();
-//     res.send(products);
-//   });
-
 app.use('/products', productRouter);
 
-// // Cart Route
-// app.post('/cart', async (req, res) => {
-//     const result = await Cart.create(req.body);
-//     console.log(result);
-//     res.send(result);
-// });
-
-// app.delete('/cart/:name', async (req, res) => {
-//     const result = await Cart.findOneAndDelete({ name: req.params.name });
-//     res.send(result);
-// });
-
-// app.get('/cart', async (req, res) => {
-//     const products = await Cart.find();
-//     res.send(products);
-//   });
-
 app.use('/cart', cartRouter);
+
+app.use('/wishlist', wishlistRouter);
 
 mongoose.connect(MONGO_URL)
   .then(() => {
