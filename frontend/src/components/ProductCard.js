@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const ProductCard = ({ key, product, addToCart, removeFromCart }) => {
     const [addedToCart, setAddedToCart] = useState(false);
+    const [addedToWL, setAddedToWL] = useState(false);
     
     const handleATCClick = () => {
         addToCart(product);
@@ -12,6 +13,17 @@ const ProductCard = ({ key, product, addToCart, removeFromCart }) => {
         console.log("trying to remove " + product)
         removeFromCart(product);
         setAddedToCart(false);
+    }
+
+    const handleATWClick = () => {
+        // addToCart(product);
+        setAddedToWL(true);
+    }
+
+    const handleRemoveWLClick = () => {
+        console.log("trying to remove " + product)
+        // removeFromCart(product);
+        setAddedToWL(false);
     }
 
     return (
@@ -25,6 +37,12 @@ const ProductCard = ({ key, product, addToCart, removeFromCart }) => {
                 className={addedToCart ? 'btn_prod_added' : 'btn_prod_addtocart'}
             >
                 {addedToCart ? 'Added to Cart' : 'Add to Cart'}
+            </button>
+            <button
+                onClick={addedToWL? handleRemoveWLClick : handleATWClick}
+                className={addedToWL ? 'btn_prod_added' : 'btn_prod_addtocart'}
+            >
+                {addedToWL ? 'Added to Wishlist' : 'Add to Wishlist'}
             </button>
         </div>
     );

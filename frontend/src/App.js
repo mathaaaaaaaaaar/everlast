@@ -19,6 +19,23 @@ import ProductListings from './components/ProductListing';
 function App() {
   const [cart, setCart] = useState([]);
 
+  const [wishlists, setWishlists] = useState([]);
+
+  const fetchWishlists = async () => {
+      try {
+          const response = await fetch('http://localhost:5555/wishlists');
+
+          if (!response.ok) {
+              throw new Error('HTTP error ' + response.status);
+          }
+
+          const data = await response.json();
+          setWishlists(data);
+      } catch (error) {
+          console.error('Failed to fetch wishlists:', error);
+      }
+  };
+
   const fetchCart = async () => {
     try {
       const response = await fetch('http://localhost:5555/cart');
@@ -81,11 +98,12 @@ function App() {
 
   useEffect(() => {
     fetchCart();
+    fetchWishlists();
   }, []);
 
   return (
     <div className="App">
-      <Header cart={cart} clearCart={clearCart} removeFromCart={removeFromCart} />
+      <Header cart={cart} clearCart={clearCart} removeFromCart={removeFromCart} wishlists={wishlists} />
       {/* { <ProductListings addToCart={addToCart} removeFromCart={removeFromCart} /> } */}
 
       <Router>

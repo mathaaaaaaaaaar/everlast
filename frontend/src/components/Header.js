@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 
 import Cart from './Cart';
+import WishlistModal from './WishlistModal';
 
-const Header = ({ cart, clearCart, removeFromCart }) => {
+const Header = ({ cart, clearCart, removeFromCart, wishlists }) => {
 
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isWLOepn, setIsWLOpen] = useState(false);
 
     function toggleCart() {
         setIsCartOpen(oldState => !oldState);
+    }
+
+    function toggleWL() {
+        setIsWLOpen(oldState => !oldState);
     }
 
     return (
@@ -20,6 +26,10 @@ const Header = ({ cart, clearCart, removeFromCart }) => {
             </a>
             <div className="header-right-section">
                 <button>Log In</button>
+                <button onClick={toggleWL}>Wishlist</button>
+                {isWLOepn && (
+                    <WishlistModal wishlists={wishlists} toggleWL={toggleWL} />
+                )}
                 <button onClick={toggleCart}>Cart</button>
                 {isCartOpen && (
                     <>
