@@ -32,18 +32,24 @@ const ProductCard = ({ key, product, addToCart, removeFromCart, addToWL, removeF
             <h2>{product.name}</h2>
             <p>{product.description}</p>
             <p>${product.price}</p>
+            {addToCart ?
             <button
                 onClick={addedToCart? handleRemoveClick : handleATCClick}
                 className={addedToCart ? 'btn_prod_added' : 'btn_prod_addtocart'}
             >
                 {addedToCart ? 'Added to Cart' : 'Add to Cart'}
             </button>
+            : null
+            }
+            {addToWL ?
             <button
                 onClick={addedToWL? handleRemoveWLClick : handleATWClick}
                 className={addedToWL ? 'btn_prod_added' : 'btn_prod_addtocart'}
             >
                 {addedToWL ? 'Added to Wishlist' : 'Add to Wishlist'}
             </button>
+            : null
+            }
         </div>
     );
 };

@@ -28,7 +28,10 @@ const Header = ({ cart, wishlist, clearCart, removeFromCart }) => {
                 <button>Log In</button>
                 <button onClick={toggleWL}>Wishlist</button>
                 {isWLOepn && (
-                    <WishlistModal wishlist={wishlist} toggleWL={toggleWL} />
+                    <>
+                        <div className="cart-backdrop" onClick={toggleWL}></div>
+                        <WishlistModal wishlist={wishlist} toggleWL={toggleWL} />
+                    </>
                 )}
                 <button onClick={toggleCart}>Cart</button>
                 {isCartOpen && (
