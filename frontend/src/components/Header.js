@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Cart from './Cart';
 import WishlistModal from './WishlistModal';
 
-const Header = ({ cart, clearCart, removeFromCart, wishlists }) => {
+const Header = ({ cart, wishlist, clearCart, removeFromCart }) => {
 
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isWLOepn, setIsWLOpen] = useState(false);
@@ -28,7 +28,7 @@ const Header = ({ cart, clearCart, removeFromCart, wishlists }) => {
                 <button>Log In</button>
                 <button onClick={toggleWL}>Wishlist</button>
                 {isWLOepn && (
-                    <WishlistModal wishlists={wishlists} toggleWL={toggleWL} />
+                    <WishlistModal wishlist={wishlist} toggleWL={toggleWL} />
                 )}
                 <button onClick={toggleCart}>Cart</button>
                 {isCartOpen && (

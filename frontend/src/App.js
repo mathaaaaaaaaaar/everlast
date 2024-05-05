@@ -19,18 +19,18 @@ import ProductListings from './components/ProductListing';
 function App() {
   const [cart, setCart] = useState([]);
 
-  const [wishlists, setWishlists] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   const fetchWishlists = async () => {
       try {
-          const response = await fetch('http://localhost:5555/wishlists');
+          const response = await fetch('http://localhost:5555/wishlist');
 
           if (!response.ok) {
               throw new Error('HTTP error ' + response.status);
           }
 
           const data = await response.json();
-          setWishlists(data);
+          setWishlist(data);
       } catch (error) {
           console.error('Failed to fetch wishlists:', error);
       }
@@ -107,7 +107,7 @@ function App() {
       const data = await response.json();
       fetchCart();
     } catch (error) {
-      console.error('Failed to add item to cart:', error);
+      console.error('Failed to add item to WL:', error);
     }
   };
 
@@ -126,7 +126,7 @@ function App() {
       // Assuming the API returns the updated cart
       fetchCart();
     } catch (error) {
-      console.error('Failed to remove item from cart:', error);
+      console.error('Failed to remove item from WL:', error);
     }
     window.location.reload();
   };
@@ -143,7 +143,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header cart={cart} clearCart={clearCart} removeFromCart={removeFromCart} wishlists={wishlists} />
+      <Header cart={cart} wishlist={wishlist} clearCart={clearCart} removeFromCart={removeFromCart} />
       {/* { <ProductListings addToCart={addToCart} removeFromCart={removeFromCart} /> } */}
 
       <Router>
