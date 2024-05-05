@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ProductCard = ({ key, product, addToCart, removeFromCart }) => {
+const ProductCard = ({ key, product, addToCart, removeFromCart, addToWL, removeFromWL }) => {
     const [addedToCart, setAddedToCart] = useState(false);
     const [addedToWL, setAddedToWL] = useState(false);
     
@@ -16,13 +16,13 @@ const ProductCard = ({ key, product, addToCart, removeFromCart }) => {
     }
 
     const handleATWClick = () => {
-        // addToCart(product);
+        addToWL(product);
         setAddedToWL(true);
     }
 
     const handleRemoveWLClick = () => {
         console.log("trying to remove " + product)
-        // removeFromCart(product);
+        removeFromWL(product);
         setAddedToWL(false);
     }
 

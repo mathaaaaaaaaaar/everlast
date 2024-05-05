@@ -91,6 +91,46 @@ function App() {
     window.location.reload();
   }
 
+  const addToWL = async (product) => {
+    try {
+      const response = await fetch('http://localhost:5555/wishlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(product),
+      });
+
+      if (!response.ok) {
+        throw new Error('HTTP error ' + response.status);
+      }
+      const data = await response.json();
+      fetchCart();
+    } catch (error) {
+      console.error('Failed to add item to cart:', error);
+    }
+  };
+
+  const removeFromWL = async (product) => {
+    try {
+      const response = await fetch(`http://localhost:5555/wishlist/${product.name}`, {
+        method: 'DELETE',
+      });
+  
+      if (!response.ok) {
+        throw new Error('HTTP error ' + response.status);
+      }
+  
+      const data = await response.json();
+  
+      // Assuming the API returns the updated cart
+      fetchCart();
+    } catch (error) {
+      console.error('Failed to remove item from cart:', error);
+    }
+    window.location.reload();
+  };
+
   const clearCart = () => {
     setCart([]);
     window.location.reload();
@@ -108,7 +148,7 @@ function App() {
 
       <Router>
         <Routes>
-            <Route path="/products" element={<ProductListings addToCart={addToCart} removeFromCart={removeFromCart} />} />
+            <Route path="/products" element={<ProductListings addToCart={addToCart} removeFromCart={removeFromCart} addToWL={addToWL} removeFromWL={removeFromWL} />} />
             <Route path='/about' element={<About />} />
             <Route path='/' element={<HomePage />} />
         </Routes>

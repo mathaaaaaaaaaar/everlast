@@ -5,7 +5,7 @@ import {
 
 import ProductCard from './ProductCard';
 
-const ProductListings = ({ addToCart, removeFromCart }) => {
+const ProductListings = ({ addToCart, removeFromCart, addToWL, removeFromWL }) => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const ProductListings = ({ addToCart, removeFromCart }) => {
     return (
         <div className="product-listings">
             {products.map(product => (
-                <ProductCard product={product} addToCart={addToCart} removeFromCart={removeFromCart} />
+                <ProductCard product={product} addToCart={addToCart} removeFromCart={removeFromCart} addToWL={addToWL} removeFromWL={removeFromWL} />
             ))}
         </div>
     );
