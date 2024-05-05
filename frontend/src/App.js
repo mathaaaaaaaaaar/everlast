@@ -21,6 +21,8 @@ function App() {
 
   const [wishlist, setWishlist] = useState([]);
 
+  const [products, setProducts] = useState([]);
+
   const fetchWishlists = async () => {
       try {
           const response = await fetch('http://localhost:5555/wishlist');
@@ -139,6 +141,19 @@ function App() {
   useEffect(() => {
     fetchCart();
     fetchWishlists();
+    fetch('http://localhost:5555/products')
+          .then(
+            response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log(response);
+                return response.json();
+            })
+          .then(data => {
+            setProducts(data);
+        })
+          .catch(error => console.error('Error:', error));
   }, []);
 
   return (
@@ -148,7 +163,7 @@ function App() {
 
       <Router>
         <Routes>
-            <Route path="/products" element={<ProductListings addToCart={addToCart} removeFromCart={removeFromCart} addToWL={addToWL} removeFromWL={removeFromWL} />} />
+            <Route path="/products" element={<ProductListings products={products} addToCart={addToCart} removeFromCart={removeFromCart} addToWL={addToWL} removeFromWL={removeFromWL} />} />
             <Route path='/about' element={<About />} />
             <Route path='/' element={<HomePage />} />
         </Routes>
