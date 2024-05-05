@@ -107,7 +107,7 @@ function App() {
         throw new Error('HTTP error ' + response.status);
       }
       const data = await response.json();
-      fetchCart();
+      fetchWishlists();
     } catch (error) {
       console.error('Failed to add item to WL:', error);
     }
@@ -126,7 +126,7 @@ function App() {
       const data = await response.json();
   
       // Assuming the API returns the updated cart
-      fetchCart();
+      fetchWishlists();
     } catch (error) {
       console.error('Failed to remove item from WL:', error);
     }
