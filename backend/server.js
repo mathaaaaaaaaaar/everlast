@@ -8,6 +8,7 @@ import {
 } from './config.js';
 import cartRouter from './Routes/cart.js';
 import productRouter from './Routes/product.js';
+import registerRouter from './Routes/register.js';
 import wishlistRouter from './Routes/wishlist.js';
 
 const app = express();
@@ -26,6 +27,8 @@ app.use('/products', productRouter);
 app.use('/cart', cartRouter);
 
 app.use('/wishlist', wishlistRouter);
+
+app.use('/register', registerRouter);
 
 mongoose.connect(MONGO_URL)
   .then(() => {
