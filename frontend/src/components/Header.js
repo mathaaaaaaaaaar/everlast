@@ -25,7 +25,6 @@ const Header = ({ cart, wishlist, clearCart, removeFromCart }) => {
                 <h1>Everlast</h1>
             </a>
             <div className="header-right-section">
-                <button>Log In</button>
                 <button onClick={toggleWL}>Wishlist</button>
                 {isWLOepn && (
                     <>
