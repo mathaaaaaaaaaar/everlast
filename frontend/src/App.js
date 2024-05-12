@@ -55,6 +55,8 @@ function App() {
 
   const addToCart = async (product) => {
     try {
+      product.purchaseCount += 1;
+      updateProduct(product);
       const response = await fetch('http://localhost:5555/cart', {
         method: 'POST',
         headers: {

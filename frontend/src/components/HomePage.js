@@ -8,7 +8,7 @@ import ProductCard from './ProductCard';
 
 const HomePage = ({products}) => {
     const likedProducts = products.sort((a, b) => b.wishlistCount - a.wishlistCount).slice(0, 6);
-    const mostPurchasedProducts = [{id: 3, name: 'Product 3'}, {id: 4, name: 'Product 4'}];
+    const mostPurchasedProducts = products.sort((a, b) => b.purchaseCount - a.purchaseCount).slice(0, 6);
 
     return (
         <div className="home-page">
@@ -22,14 +22,14 @@ const HomePage = ({products}) => {
                 {/* Add more slides as needed */}
             </Carousel>
 
-            <h2>Featured Products</h2>
+            <h2>Most Wishlisted Products</h2>
             <div className="product-list">
                 {likedProducts.map(product => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>
 
-            <h2>Recommended Products</h2>
+            <h2>Most Purchased Products</h2>
             <div className="product-list">
                 {mostPurchasedProducts.map(product => (
                     <ProductCard key={product.id} product={product} />
