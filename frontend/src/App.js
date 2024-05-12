@@ -96,6 +96,7 @@ function App() {
   const addToWL = async (product) => {
     try {
       product.wishlistCount += 1;
+      updateProduct(product);
       const response = await fetch('http://localhost:5555/wishlist', {
         method: 'POST',
         headers: {
@@ -112,6 +113,23 @@ function App() {
     } catch (error) {
       console.error('Failed to add item to WL:', error);
     }
+  };
+
+  const updateProduct = async (product) => {
+    const response = await fetch(`http://localhost:5555/products/${product.name}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(product),
+    });
+
+    if (!response.ok) {
+        throw new Error('HTTP error ' + response.status);
+    }
+
+    const data = await response.json();
+    // Handle the updated product
   };
 
   const removeFromWL = async (product) => {

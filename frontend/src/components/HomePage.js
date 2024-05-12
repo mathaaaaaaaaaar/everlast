@@ -7,7 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import ProductCard from './ProductCard';
 
 const HomePage = ({products}) => {
-    const likedProducts = products.sort((a, b) => a.wishlistCount - b.wishlistCount).slice(0, 6);
+    const likedProducts = products.sort((a, b) => b.wishlistCount - a.wishlistCount).slice(0, 6);
     const mostPurchasedProducts = [{id: 3, name: 'Product 3'}, {id: 4, name: 'Product 4'}];
 
     return (

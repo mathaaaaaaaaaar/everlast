@@ -10,12 +10,11 @@ router.post('/', async (req, res) => {
     res.send(result);
   });
 
-  router.put('/products/:name', async (req, res) => {
-    const { name } = req.params.name;
+  router.put('/:name', async (req, res) => {
     const { wishlistCount, purchaseCount } = req.body;
 
     try {
-        const product = await Product.findOne(name);
+        const product = await Product.findOne({ name: req.params.name });
         if (!product) {
             return res.status(404).send('Product not found');
         }
