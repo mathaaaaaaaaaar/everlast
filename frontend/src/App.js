@@ -95,6 +95,7 @@ function App() {
 
   const addToWL = async (product) => {
     try {
+      product.wishlistCount += 1;
       const response = await fetch('http://localhost:5555/wishlist', {
         method: 'POST',
         headers: {
@@ -147,11 +148,11 @@ function App() {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                console.log(response);
                 return response.json();
             })
           .then(data => {
             setProducts(data);
+            console.log(data);
         })
           .catch(error => console.error('Error:', error));
   }, []);
@@ -165,7 +166,7 @@ function App() {
         <Routes>
             <Route path="/products" element={<ProductListings products={products} addToCart={addToCart} removeFromCart={removeFromCart} addToWL={addToWL} removeFromWL={removeFromWL} />} />
             <Route path='/about' element={<About />} />
-            <Route path='/' element={<HomePage />} />
+            <Route path='/' element={<HomePage products={products} />} />
         </Routes>
       </Router>
     </div>

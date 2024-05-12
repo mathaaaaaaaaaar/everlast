@@ -6,10 +6,9 @@ import { Carousel } from 'react-responsive-carousel';
 
 import ProductCard from './ProductCard';
 
-const HomePage = () => {
-    // Replace these with your actual products
-    const featuredProducts = [{id: 1, name: 'Product 1'}, {id: 2, name: 'Product 2'}];
-    const recommendedProducts = [{id: 3, name: 'Product 3'}, {id: 4, name: 'Product 4'}];
+const HomePage = ({products}) => {
+    const likedProducts = products.sort((a, b) => a.wishlistCount - b.wishlistCount).slice(0, 6);
+    const mostPurchasedProducts = [{id: 3, name: 'Product 3'}, {id: 4, name: 'Product 4'}];
 
     return (
         <div className="home-page">
@@ -25,14 +24,14 @@ const HomePage = () => {
 
             <h2>Featured Products</h2>
             <div className="product-list">
-                {featuredProducts.map(product => (
+                {likedProducts.map(product => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>
 
             <h2>Recommended Products</h2>
             <div className="product-list">
-                {recommendedProducts.map(product => (
+                {mostPurchasedProducts.map(product => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>
